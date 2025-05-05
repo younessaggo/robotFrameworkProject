@@ -1,326 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-02T10:32:03.930949" rpa="false" schemaversion="5">
-<suite id="s1" name="Order" source="C:\Users\ymokhtari\PycharmProjects\APIAutomation\Tests\Order.robot">
-<kw name="Authenticate And Store Token And Client Name" owner="order_keywords" type="SETUP">
-<msg time="2025-05-02T10:32:04.365608" level="TRACE">Arguments: [  ]</msg>
-<kw name="Authenticate And Store Token For New Client" owner="auth_keywords">
-<msg time="2025-05-02T10:32:04.365802" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Api Session" owner="common">
-<msg time="2025-05-02T10:32:04.365926" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:04.366325" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
-<msg time="2025-05-02T10:32:04.366398" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<msg time="2025-05-02T10:32:04.366417" level="DEBUG">Creating session: apisession</msg>
-<msg time="2025-05-02T10:32:04.366519" level="TRACE">Return: &lt;requests.sessions.Session object at 0x00000216EA6CF230&gt;</msg>
-<arg>apisession</arg>
-<arg>${BASE_URL}</arg>
-<arg>verify=True</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-02T10:32:04.366219" elapsed="0.000330"/>
-</kw>
-<msg time="2025-05-02T10:32:04.366601" level="TRACE">Return: None</msg>
-<doc>Creates a session for authentication requests</doc>
-<status status="PASS" start="2025-05-02T10:32:04.365888" elapsed="0.000735"/>
-</kw>
-<kw name="Generate Random Credentials" owner="auth_keywords">
-<msg time="2025-05-02T10:32:04.366771" level="TRACE">Arguments: [  ]</msg>
-<kw name="Generate Random String" owner="String">
-<msg time="2025-05-02T10:32:04.366933" level="TRACE">Arguments: [ 8 | '[LOWER]' ]</msg>
-<msg time="2025-05-02T10:32:04.366993" level="TRACE">Return: 'avvhjwcu'</msg>
-<msg time="2025-05-02T10:32:04.367034" level="INFO">${random_string} = avvhjwcu</msg>
-<var>${random_string}</var>
-<arg>8</arg>
-<arg>[LOWER]</arg>
-<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.366850" elapsed="0.000199"/>
-</kw>
-<kw name="Get Time" owner="BuiltIn">
-<msg time="2025-05-02T10:32:04.367158" level="TRACE">Arguments: [ 'epoch' ]</msg>
-<msg time="2025-05-02T10:32:04.367215" level="TRACE">Return: 1746178324</msg>
-<msg time="2025-05-02T10:32:04.367252" level="INFO">${timestamp} = 1746178324</msg>
-<var>${timestamp}</var>
-<arg>epoch</arg>
-<doc>Returns the given time in the requested format.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.367119" elapsed="0.000146"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:04.367396" level="TRACE">Arguments: [ 'user_avvhjwcu_1746178324@exemple.com' ]</msg>
-<msg time="2025-05-02T10:32:04.367427" level="TRACE">Return: 'user_avvhjwcu_1746178324@exemple.com'</msg>
-<msg time="2025-05-02T10:32:04.367456" level="INFO">${random_email} = user_avvhjwcu_1746178324@exemple.com</msg>
-<var>${random_email}</var>
-<arg>user_${random_string}_${timestamp}${EMAIL_SUFFIX}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.367325" elapsed="0.000144"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:04.367581" level="TRACE">Arguments: [ 'avvhjwcu1746178324' ]</msg>
-<msg time="2025-05-02T10:32:04.367611" level="TRACE">Return: 'avvhjwcu1746178324'</msg>
-<msg time="2025-05-02T10:32:04.367640" level="INFO">${random_name} = avvhjwcu1746178324</msg>
-<var>${random_name}</var>
-<arg>${random_string}${timestamp}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.367525" elapsed="0.000128"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:04.367740" level="TRACE">Arguments: [ 'clientName=${random_name}' | 'clientEmail=${random_email}' ]</msg>
-<msg time="2025-05-02T10:32:04.367900" level="TRACE">Return: {'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'}</msg>
-<msg time="2025-05-02T10:32:04.367962" level="INFO">${credentials} = {'clientName': 'avvhjwcu1746178324', 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'}</msg>
-<var>${credentials}</var>
-<arg>clientName=${random_name}</arg>
-<arg>clientEmail=${random_email}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.367715" elapsed="0.000261"/>
-</kw>
-<return>
-<value>${credentials}</value>
-<status status="PASS" start="2025-05-02T10:32:04.368011" elapsed="0.000031"/>
-</return>
-<msg time="2025-05-02T10:32:04.368097" level="TRACE">Return: {'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'}</msg>
-<msg time="2025-05-02T10:32:04.368148" level="INFO">${credentials} = {'clientName': 'avvhjwcu1746178324', 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'}</msg>
-<var>${credentials}</var>
-<doc>Generates random client credentials</doc>
-<status status="PASS" start="2025-05-02T10:32:04.366726" elapsed="0.001435"/>
-</kw>
-<kw name="Send Auth Request" owner="auth_keywords">
-<msg time="2025-05-02T10:32:04.368315" level="TRACE">Arguments: [ ${credentials}={'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'} ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:04.368434" level="TRACE">Arguments: [ 'Content-Type=application/json' ]</msg>
-<msg time="2025-05-02T10:32:04.368487" level="TRACE">Return: {'Content-Type': 'application/json'}</msg>
-<msg time="2025-05-02T10:32:04.368522" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<var>${headers}</var>
-<arg>Content-Type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.368408" elapsed="0.000127"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:04.368680" level="TRACE">Arguments: [ 'apisession' | '/api-clients/' | json={'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'} | headers={'Content-Type': 'application/json'} | expected_status='201' ]</msg>
-<msg time="2025-05-02T10:32:04.370301" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
-<msg time="2025-05-02T10:32:11.200898" level="DEBUG">https://simple-books-api.glitch.me:443 "POST /api-clients/ HTTP/1.1" 201 82</msg>
-<msg time="2025-05-02T10:32:11.201247" level="INFO">POST Request : url=https://simple-books-api.glitch.me/api-clients/ 
- path_url=/api-clients/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '91'} 
- body=b'{"clientName": "avvhjwcu1746178324", "clientEmail": "user_avvhjwcu_1746178324@exemple.com"}' 
- </msg>
-<msg time="2025-05-02T10:32:11.201338" level="INFO">POST Response : url=https://simple-books-api.glitch.me/api-clients/ 
- status=201, reason=Created 
- headers={'Connection': 'keep-alive', 'Content-Length': '82', 'etag': 'W/"52-9Wz0Or+wA97k/7h1/FgyQAvU7d0"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:07 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-lis1490058-LIS, cache-lis1490058-LIS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178321.680394,VS0,VE6666'} 
- body={"accessToken":"d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d"} 
- </msg>
-<msg time="2025-05-02T10:32:11.201383" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:11.201602" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<var>${response}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_API_CLIENTS}</arg>
-<arg>json=${credentials}</arg>
-<arg>headers=${headers}</arg>
-<arg>expected_status=201</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.368594" elapsed="6.833030"/>
-</kw>
-<return>
-<value>${response}</value>
-<status status="PASS" start="2025-05-02T10:32:11.201684" elapsed="0.000051"/>
-</return>
-<msg time="2025-05-02T10:32:11.201811" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:11.201854" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<var>${response}</var>
-<arg>${credentials}</arg>
-<doc>Sends authentication request with provided credentials</doc>
-<status status="PASS" start="2025-05-02T10:32:04.368244" elapsed="6.833623"/>
-</kw>
-<kw name="Get Client Name" owner="auth_keywords">
-<msg time="2025-05-02T10:32:11.202093" level="TRACE">Arguments: [ ${data}={'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'} ]</msg>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:11.202278" level="TRACE">Arguments: [ {'clientName': 'avvhjwcu1746178324',
- 'clientEmail': 'user_avvhjwcu_1746178324@exemple.com'} | 'clientName' ]</msg>
-<msg time="2025-05-02T10:32:11.202338" level="TRACE">Return: 'avvhjwcu1746178324'</msg>
-<msg time="2025-05-02T10:32:11.202369" level="INFO">${name} = avvhjwcu1746178324</msg>
-<var>${name}</var>
-<arg>${data}</arg>
-<arg>clientName</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.202222" elapsed="0.000160"/>
-</kw>
-<return>
-<value>${name}</value>
-<status status="PASS" start="2025-05-02T10:32:11.202413" elapsed="0.000019"/>
-</return>
-<msg time="2025-05-02T10:32:11.202476" level="TRACE">Return: 'avvhjwcu1746178324'</msg>
-<msg time="2025-05-02T10:32:11.202507" level="INFO">${client_name} = avvhjwcu1746178324</msg>
-<var>${client_name}</var>
-<arg>${credentials}</arg>
-<status status="PASS" start="2025-05-02T10:32:11.201993" elapsed="0.000527"/>
-</kw>
-<kw name="Extract Access Token" owner="auth_keywords">
-<msg time="2025-05-02T10:32:11.202669" level="TRACE">Arguments: [ ${response}=&lt;Response [201]&gt; ]</msg>
-<kw name="Dictionary Should Contain Key" owner="Collections">
-<msg time="2025-05-02T10:32:11.203036" level="TRACE">Arguments: [ {'accessToken': 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | 'accessToken' | msg='Response does not contain access token' ]</msg>
-<msg time="2025-05-02T10:32:11.203102" level="TRACE">Return: None</msg>
-<arg>${response.json()}</arg>
-<arg>accessToken</arg>
-<arg>msg=Response does not contain access token</arg>
-<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.202744" elapsed="0.000380"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:11.203796" level="TRACE">Arguments: [ 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d' ]</msg>
-<msg time="2025-05-02T10:32:11.203847" level="TRACE">Return: 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'</msg>
-<msg time="2025-05-02T10:32:11.203883" level="INFO">${token} = d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d</msg>
-<var>${token}</var>
-<arg>${response.json()}[accessToken]</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.203200" elapsed="0.000697"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-05-02T10:32:11.204028" level="TRACE">Arguments: [ 'Authentication token generated successfully' | level='INFO' ]</msg>
-<msg time="2025-05-02T10:32:11.204068" level="INFO">Authentication token generated successfully</msg>
-<msg time="2025-05-02T10:32:11.204086" level="TRACE">Return: None</msg>
-<arg>Authentication token generated successfully</arg>
-<arg>level=INFO</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.203974" elapsed="0.000130"/>
-</kw>
-<return>
-<value>${token}</value>
-<status status="PASS" start="2025-05-02T10:32:11.204132" elapsed="0.000016"/>
-</return>
-<msg time="2025-05-02T10:32:11.204204" level="TRACE">Return: 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'</msg>
-<msg time="2025-05-02T10:32:11.204236" level="INFO">${token} = d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d</msg>
-<var>${token}</var>
-<arg>${response}</arg>
-<doc>Extracts and validates access token from response</doc>
-<status status="PASS" start="2025-05-02T10:32:11.202605" elapsed="0.001643"/>
-</kw>
-<kw name="Store Token Into A file" owner="auth_keywords">
-<msg time="2025-05-02T10:32:11.204412" level="TRACE">Arguments: [ ${token_key}='avvhjwcu1746178324' | ${token_value}='d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d' ]</msg>
-<kw name="Store Token" owner="TokenManager">
-<msg time="2025-05-02T10:32:11.204554" level="TRACE">Arguments: [ 'avvhjwcu1746178324' | 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d' ]</msg>
-<msg time="2025-05-02T10:32:11.205071" level="TRACE">Return: None</msg>
-<arg>${token_key}</arg>
-<arg>${token_value}</arg>
-<status status="PASS" start="2025-05-02T10:32:11.204496" elapsed="0.000608"/>
-</kw>
-<msg time="2025-05-02T10:32:11.205136" level="TRACE">Return: None</msg>
-<arg>${client_name}</arg>
-<arg>${token}</arg>
-<status status="PASS" start="2025-05-02T10:32:11.204322" elapsed="0.000833"/>
-</kw>
-<return>
-<value>${client_name}</value>
-<status status="PASS" start="2025-05-02T10:32:11.205187" elapsed="0.000020"/>
-</return>
-<msg time="2025-05-02T10:32:11.205256" level="TRACE">Return: 'avvhjwcu1746178324'</msg>
-<msg time="2025-05-02T10:32:11.205292" level="INFO">${name} = avvhjwcu1746178324</msg>
-<var>${name}</var>
-<doc>Registers a new client, retrieves its token, stores it into a file, and returns the client name.</doc>
-<status status="PASS" start="2025-05-02T10:32:04.365754" elapsed="6.839550"/>
-</kw>
-<kw name="Get Token From File" owner="auth_keywords">
-<msg time="2025-05-02T10:32:11.205449" level="TRACE">Arguments: [ ${token_key}='avvhjwcu1746178324' ]</msg>
-<kw name="Get Token" owner="TokenManager">
-<msg time="2025-05-02T10:32:11.205565" level="TRACE">Arguments: [ 'avvhjwcu1746178324' ]</msg>
-<msg time="2025-05-02T10:32:11.205729" level="TRACE">Return: 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'</msg>
-<msg time="2025-05-02T10:32:11.205772" level="INFO">${token} = d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d</msg>
-<var>${token}</var>
-<arg>${token_key}</arg>
-<status status="PASS" start="2025-05-02T10:32:11.205520" elapsed="0.000266"/>
-</kw>
-<return>
-<value>${token}</value>
-<status status="PASS" start="2025-05-02T10:32:11.205817" elapsed="0.000018"/>
-</return>
-<msg time="2025-05-02T10:32:11.205882" level="TRACE">Return: 'd6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'</msg>
-<msg time="2025-05-02T10:32:11.205914" level="INFO">${token} = d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d</msg>
-<var>${token}</var>
-<arg>${name}</arg>
-<status status="PASS" start="2025-05-02T10:32:11.205384" elapsed="0.000542"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:11.206023" level="TRACE">Arguments: [ '${AUTH_TOKEN}' | '${token}' ]</msg>
-<msg time="2025-05-02T10:32:11.206122" level="INFO">${AUTH_TOKEN} = d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d</msg>
-<msg time="2025-05-02T10:32:11.206139" level="TRACE">Return: None</msg>
-<arg>${AUTH_TOKEN}</arg>
-<arg>${token}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.205996" elapsed="0.000160"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:11.206247" level="TRACE">Arguments: [ '${CLIENT_NAME}' | '${name}' ]</msg>
-<msg time="2025-05-02T10:32:11.206397" level="INFO">${CLIENT_NAME} = avvhjwcu1746178324</msg>
-<msg time="2025-05-02T10:32:11.206415" level="TRACE">Return: None</msg>
-<arg>${CLIENT_NAME}</arg>
-<arg>${name}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.206224" elapsed="0.000209"/>
-</kw>
-<msg time="2025-05-02T10:32:11.206460" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:04.365523" elapsed="6.840954"/>
-</kw>
-<test id="s1-t1" name="Retrieve All Orders And Validate Orders JSON With Schema" line="13">
-<kw name="Create A Order With An Available Book" owner="order_keywords" type="SETUP">
-<msg time="2025-05-02T10:32:11.207152" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:11.207290" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' | 'Content-type=application/json' ]</msg>
-<msg time="2025-05-02T10:32:11.207418" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'}</msg>
-<msg time="2025-05-02T10:32:11.207470" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<arg>Content-type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.207244" elapsed="0.000240"/>
-</kw>
-<kw name="Get Randomly Availabale Book" owner="book_keywords">
-<msg time="2025-05-02T10:32:11.207689" level="TRACE">Arguments: [  ]</msg>
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-04T15:08:10.479638" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\ymokhtari\PycharmProjects\APIAutomation\Tests">
+<suite id="s1-s1" name="Books" source="C:\Users\ymokhtari\PycharmProjects\APIAutomation\Tests\Books.robot">
+<test id="s1-s1-t1" name="Retrieve All Books And Validate Books JSON With Schema" line="6">
 <kw name="Get All Books" owner="book_keywords">
-<msg time="2025-05-02T10:32:11.207826" level="TRACE">Arguments: [  ]</msg>
+<msg time="2025-05-04T15:08:10.957253" level="TRACE">Arguments: [  ]</msg>
 <kw name="Create Api Session" owner="common">
-<msg time="2025-05-02T10:32:11.207963" level="TRACE">Arguments: [  ]</msg>
+<msg time="2025-05-04T15:08:10.957481" level="TRACE">Arguments: [  ]</msg>
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:11.208097" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
-<msg time="2025-05-02T10:32:11.208140" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<msg time="2025-05-02T10:32:11.208157" level="DEBUG">Creating session: apisession</msg>
-<msg time="2025-05-02T10:32:11.208242" level="TRACE">Return: &lt;requests.sessions.Session object at 0x00000216EA792AD0&gt;</msg>
+<msg time="2025-05-04T15:08:10.957849" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
+<msg time="2025-05-04T15:08:10.957923" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<msg time="2025-05-04T15:08:10.957942" level="DEBUG">Creating session: apisession</msg>
+<msg time="2025-05-04T15:08:10.958048" level="TRACE">Return: &lt;requests.sessions.Session object at 0x000002B36BB52F90&gt;</msg>
 <arg>apisession</arg>
 <arg>${BASE_URL}</arg>
 <arg>verify=True</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-02T10:32:11.208022" elapsed="0.000244"/>
+<status status="PASS" start="2025-05-04T15:08:10.957750" elapsed="0.000327"/>
 </kw>
-<msg time="2025-05-02T10:32:11.208298" level="TRACE">Return: None</msg>
+<msg time="2025-05-04T15:08:10.958129" level="TRACE">Return: None</msg>
 <doc>Creates a session for authentication requests</doc>
-<status status="PASS" start="2025-05-02T10:32:11.207904" elapsed="0.000412"/>
+<status status="PASS" start="2025-05-04T15:08:10.957401" elapsed="0.000749"/>
 </kw>
 <kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:11.208431" level="TRACE">Arguments: [ 'apisession' | '/books/' | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:11.209016" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
-<msg time="2025-05-02T10:32:15.950918" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /books/ HTTP/1.1" 200 417</msg>
-<msg time="2025-05-02T10:32:15.951597" level="INFO">GET Request : url=https://simple-books-api.glitch.me/books/ 
+<msg time="2025-05-04T15:08:10.958280" level="TRACE">Arguments: [ 'apisession' | '/books/' | expected_status='200' ]</msg>
+<msg time="2025-05-04T15:08:10.959907" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
+<msg time="2025-05-04T15:08:11.259515" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /books/ HTTP/1.1" 200 417</msg>
+<msg time="2025-05-04T15:08:11.259796" level="INFO">GET Request : url=https://simple-books-api.glitch.me/books/ 
  path_url=/books/ 
  headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg time="2025-05-02T10:32:15.951743" level="INFO">GET Response : url=https://simple-books-api.glitch.me/books/ 
+<msg time="2025-05-04T15:08:11.259870" level="INFO">GET Response : url=https://simple-books-api.glitch.me/books/ 
  status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '417', 'etag': 'W/"1a1-MfqhfTYtZO2sguD1mJq8Vf41WjU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:12 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-lis1490048-LIS, cache-lis1490048-LIS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178327.442733,VS0,VE4653'} 
+ headers={'Connection': 'keep-alive', 'Content-Length': '417', 'etag': 'W/"1a1-MfqhfTYtZO2sguD1mJq8Vf41WjU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Sun, 04 May 2025 14:08:09 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-lis1490030-LIS, cache-lis1490030-LIS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746367689.994560,VS0,VE124'} 
  body=[{"id":1,"name":"The Russian","type":"fiction","available":true},{"id":2,"name":"Just as I Am","type":"non-fiction","available":false},{"id":3,"name":"The Vanishing Half","type":"fiction","available":true},{"id":4,"name":"The Midnight Library","type":"fiction","available":true},{"id":5,"name":"Untamed","type":"non-fiction","available":true},{"id":6,"name":"Viscount Who Loved Me","type":"fiction","available":true}] 
  </msg>
-<msg time="2025-05-02T10:32:15.951854" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:15.952021" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<msg time="2025-05-04T15:08:11.259919" level="TRACE">Return: &lt;Response [200]&gt;</msg>
+<msg time="2025-05-04T15:08:11.259994" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
 <var>${resp}</var>
 <arg>apisession</arg>
 <arg>${ENDPOINT_BOOKS}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:11.208375" elapsed="4.743703"/>
+<status status="PASS" start="2025-05-04T15:08:10.958219" elapsed="0.301790"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:15.953366" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
+<msg time="2025-05-04T15:08:11.260462" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
  {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
  {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
  {'id': 4,
@@ -332,7 +58,7 @@
   'name': 'Viscount Who Loved Me',
   'type': 'fiction',
   'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:15.953814" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
+<msg time="2025-05-04T15:08:11.260611" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
  {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
  {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
  {'id': 4,
@@ -344,17 +70,17 @@
   'name': 'Viscount Who Loved Me',
   'type': 'fiction',
   'available': True}]</msg>
-<msg time="2025-05-02T10:32:15.954190" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
+<msg time="2025-05-04T15:08:11.260731" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
 <var>${books}</var>
 <arg>${resp.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.952420" elapsed="0.001818"/>
+<status status="PASS" start="2025-05-04T15:08:11.260129" elapsed="0.000617"/>
 </kw>
 <return>
 <value>${books}</value>
-<status status="PASS" start="2025-05-02T10:32:15.954397" elapsed="0.000086"/>
+<status status="PASS" start="2025-05-04T15:08:11.260788" elapsed="0.000039"/>
 </return>
-<msg time="2025-05-02T10:32:15.954677" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
+<msg time="2025-05-04T15:08:11.260897" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
  {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
  {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
  {'id': 4,
@@ -366,203 +92,13 @@
   'name': 'Viscount Who Loved Me',
   'type': 'fiction',
   'available': True}]</msg>
-<msg time="2025-05-02T10:32:15.955085" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
+<msg time="2025-05-04T15:08:11.261012" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
 <var>${books}</var>
-<status status="PASS" start="2025-05-02T10:32:11.207768" elapsed="4.747371"/>
+<status status="PASS" start="2025-05-04T15:08:10.956901" elapsed="0.304126"/>
 </kw>
-<kw name="Create List" owner="BuiltIn">
-<msg time="2025-05-02T10:32:15.955485" level="TRACE">Arguments: [  ]</msg>
-<msg time="2025-05-02T10:32:15.955698" level="TRACE">Return: []</msg>
-<msg time="2025-05-02T10:32:15.955829" level="INFO">${available_books} = []</msg>
-<var>${available_books}</var>
-<doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.955386" elapsed="0.000488"/>
-</kw>
-<for flavor="IN">
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.956956" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.957159" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:15.957279" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.956773" elapsed="0.000551"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:15.958165" level="TRACE">Arguments: [ [] | {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:15.958320" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.957947" elapsed="0.000439"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:15.957499" elapsed="0.000963"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.957453" elapsed="0.001071"/>
-</if>
-<var name="${book}">{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:15.956561" elapsed="0.002017"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.959180" level="TRACE">Arguments: [ {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.959319" level="TRACE">Return: False</msg>
-<msg time="2025-05-02T10:32:15.959427" level="INFO">${is_available} = False</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.959000" elapsed="0.000471"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="NOT RUN" start="2025-05-02T10:32:15.959998" elapsed="0.000055"/>
-</kw>
-<status status="NOT RUN" start="2025-05-02T10:32:15.959608" elapsed="0.000520"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.959573" elapsed="0.000605"/>
-</if>
-<var name="${book}">{'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}</var>
-<status status="PASS" start="2025-05-02T10:32:15.958834" elapsed="0.001393"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.960788" level="TRACE">Arguments: [ {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.960946" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:15.961069" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.960620" elapsed="0.000493"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:15.961775" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}] | {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:15.961936" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.961594" elapsed="0.000402"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:15.961243" elapsed="0.000845"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.961212" elapsed="0.000925"/>
-</if>
-<var name="${book}">{'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:15.960463" elapsed="0.001717"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.962715" level="TRACE">Arguments: [ {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.962853" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:15.962957" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.962560" elapsed="0.000445"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:15.963676" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}] | {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:15.963906" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.963503" elapsed="0.000464"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:15.963142" elapsed="0.000911"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.963112" elapsed="0.000995"/>
-</if>
-<var name="${book}">{'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:15.962396" elapsed="0.001754"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.964687" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.964839" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:15.964950" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.964532" elapsed="0.000461"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:15.965635" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True}] | {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:15.965896" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.965471" elapsed="0.000483"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:15.965140" elapsed="0.000880"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.965108" elapsed="0.000979"/>
-</if>
-<var name="${book}">{'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:15.964364" elapsed="0.001766"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.966876" level="TRACE">Arguments: [ {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:15.967013" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:15.967137" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.966719" elapsed="0.000458"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:15.967792" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}] | {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:15.968102" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.967632" elapsed="0.000526"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:15.967302" elapsed="0.001133"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:15.967272" elapsed="0.001254"/>
-</if>
-<var name="${book}">{'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:15.966552" elapsed="0.002021"/>
-</iter>
-<var>${book}</var>
-<value>@{books}</value>
-<status status="PASS" start="2025-05-02T10:32:15.956008" elapsed="0.012623"/>
-</for>
-<kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-02T10:32:15.969060" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
+<kw name="Book Schema Validator" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.261494" level="TRACE">Arguments: [ ${books}=[{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
+ {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
  {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
  {'id': 4,
   'name': 'The Midnight Library',
@@ -573,1997 +109,183 @@
   'name': 'Viscount Who Loved Me',
   'type': 'fiction',
   'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:15.969436" level="INFO">Length is 5.</msg>
-<msg time="2025-05-02T10:32:15.969503" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:15.969637" level="INFO">${available_count} = 5</msg>
-<var>${available_count}</var>
-<arg>${available_books}</arg>
-<doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.968874" elapsed="0.000799"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-02T10:32:15.970038" level="TRACE">Arguments: [ 'random.randint(0, 5-1)' | 'random' ]</msg>
-<msg time="2025-05-02T10:32:15.970223" level="TRACE">Return: 0</msg>
-<msg time="2025-05-02T10:32:15.970319" level="INFO">${random_index} = 0</msg>
-<var>${random_index}</var>
-<arg>random.randint(0, ${available_count}-1)</arg>
-<arg>random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.969850" elapsed="0.000503"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-05-02T10:32:15.970681" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] | 0 ]</msg>
-<msg time="2025-05-02T10:32:15.970956" level="TRACE">Return: {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:15.971055" level="INFO">${random_book} = {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<var>${random_book}</var>
-<arg>${available_books}</arg>
-<arg>${random_index}</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.970528" elapsed="0.000560"/>
-</kw>
-<return>
-<value>${random_book}</value>
-<status status="PASS" start="2025-05-02T10:32:15.971159" elapsed="0.000045"/>
-</return>
-<msg time="2025-05-02T10:32:15.971323" level="TRACE">Return: {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:15.971420" level="INFO">${book} = {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<var>${book}</var>
-<doc>Returns a randomly selected book that is available</doc>
-<status status="PASS" start="2025-05-02T10:32:11.207626" elapsed="4.763827"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:15.971742" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'id' ]</msg>
-<msg time="2025-05-02T10:32:15.971845" level="TRACE">Return: 1</msg>
-<msg time="2025-05-02T10:32:15.971929" level="INFO">${book_id} = 1</msg>
-<var>${book_id}</var>
-<arg>${book}</arg>
-<arg>id</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.971620" elapsed="0.000340"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:15.972188" level="TRACE">Arguments: [ 'bookId=${book_id}' | 'customerName=${CLIENT_NAME}' ]</msg>
-<msg time="2025-05-02T10:32:15.972552" level="TRACE">Return: {'bookId': 1, 'customerName': 'avvhjwcu1746178324'}</msg>
-<msg time="2025-05-02T10:32:15.972663" level="INFO">${body} = {'bookId': 1, 'customerName': 'avvhjwcu1746178324'}</msg>
-<var>${body}</var>
-<arg>bookId=${book_id}</arg>
-<arg>customerName=${CLIENT_NAME}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.972127" elapsed="0.000571"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:15.973089" level="TRACE">Arguments: [ 'apisession' | '/orders/' | json={'bookId': 1, 'customerName': 'avvhjwcu1746178324'} | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'} ]</msg>
-<msg time="2025-05-02T10:32:39.972716" level="DEBUG">https://simple-books-api.glitch.me:443 "POST /orders/ HTTP/1.1" 201 50</msg>
-<msg time="2025-05-02T10:32:39.973294" level="INFO">POST Request : url=https://simple-books-api.glitch.me/orders/ 
- path_url=/orders/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json', 'Content-Length': '51'} 
- body=b'{"bookId": 1, "customerName": "avvhjwcu1746178324"}' 
- </msg>
-<msg time="2025-05-02T10:32:39.973415" level="INFO">POST Response : url=https://simple-books-api.glitch.me/orders/ 
- status=201, reason=Created 
- headers={'Connection': 'keep-alive', 'Content-Length': '50', 'etag': 'W/"32-BUOC6jkTOY5AUaF01bY1uaggSqw"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:36 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-lis1490048-LIS, cache-lis1490048-LIS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178332.146384,VS0,VE23972'} 
- body={"created":true,"orderId":"oAw9LEN_pajUpzjKZ5vGO"} 
- </msg>
-<msg time="2025-05-02T10:32:39.973517" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:39.973680" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}</arg>
-<arg>json=${body}</arg>
-<arg>headers=${header}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:15.972872" elapsed="24.000976"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:39.975188" level="TRACE">Arguments: [ {'created': True, 'orderId': 'oAw9LEN_pajUpzjKZ5vGO'} ]</msg>
-<msg time="2025-05-02T10:32:39.975348" level="TRACE">Return: {'created': True, 'orderId': 'oAw9LEN_pajUpzjKZ5vGO'}</msg>
-<msg time="2025-05-02T10:32:39.975474" level="INFO">${order} = {'created': True, 'orderId': 'oAw9LEN_pajUpzjKZ5vGO'}</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:39.974191" elapsed="0.001328"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:39.975940" level="TRACE">Arguments: [ {'created': True, 'orderId': 'oAw9LEN_pajUpzjKZ5vGO'} | 'orderId' ]</msg>
-<msg time="2025-05-02T10:32:39.976091" level="TRACE">Return: 'oAw9LEN_pajUpzjKZ5vGO'</msg>
-<msg time="2025-05-02T10:32:39.976191" level="INFO">${id} = oAw9LEN_pajUpzjKZ5vGO</msg>
-<var>${id}</var>
-<arg>${order}</arg>
-<arg>orderId</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:39.975750" elapsed="0.000483"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:39.976543" level="TRACE">Arguments: [ '${ORDER_ID}' | '${id}' ]</msg>
-<msg time="2025-05-02T10:32:39.976850" level="INFO">${ORDER_ID} = oAw9LEN_pajUpzjKZ5vGO</msg>
-<msg time="2025-05-02T10:32:39.976907" level="TRACE">Return: None</msg>
-<arg>${ORDER_ID}</arg>
-<arg>${id}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:39.976459" elapsed="0.000508"/>
-</kw>
-<msg time="2025-05-02T10:32:39.977070" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:11.207053" elapsed="28.770074"/>
-</kw>
-<kw name="Get All Oders" owner="order_keywords">
-<msg time="2025-05-02T10:32:39.978327" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:39.978427" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:39.978521" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:39.978573" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:39.978402" elapsed="0.000185"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:39.978717" level="TRACE">Arguments: [ 'apisession' | '/orders/' | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:41.838075" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /orders/ HTTP/1.1" 200 197</msg>
-<msg time="2025-05-02T10:32:41.838312" level="INFO">GET Request : url=https://simple-books-api.glitch.me/orders/ 
- path_url=/orders/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:41.838355" level="INFO">GET Response : url=https://simple-books-api.glitch.me/orders/ 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '197', 'etag': 'W/"c5-SJx0/GeYcP/Sx42pYs3L9Mg3kp4"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:37 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-lis1490048-LIS, cache-lis1490048-LIS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178356.152500,VS0,VE1832'} 
- body=[{"id":"oAw9LEN_pajUpzjKZ5vGO","bookId":1,"customerName":"avvhjwcu1746178324","createdBy":"e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b","quantity":1,"timestamp":1746178355659}] 
- </msg>
-<msg time="2025-05-02T10:32:41.838395" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:41.838463" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:39.978649" elapsed="1.859829"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:41.839191" level="TRACE">Arguments: [ [{'id': 'oAw9LEN_pajUpzjKZ5vGO',
-  'bookId': 1,
-  'customerName': 'avvhjwcu1746178324',
-  'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
-  'quantity': 1,
-  'timestamp': 1746178355659}] ]</msg>
-<msg time="2025-05-02T10:32:41.839294" level="TRACE">Return: [{'id': 'oAw9LEN_pajUpzjKZ5vGO',
-  'bookId': 1,
-  'customerName': 'avvhjwcu1746178324',
-  'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
-  'quantity': 1,
-  'timestamp': 1746178355659}]</msg>
-<msg time="2025-05-02T10:32:41.839364" level="INFO">${orders} = [{'id': 'oAw9LEN_pajUpzjKZ5vGO', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178...</msg>
-<var>${orders}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:41.838692" elapsed="0.000688"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-05-02T10:32:41.839542" level="TRACE">Arguments: [ [{'id': 'oAw9LEN_pajUpzjKZ5vGO',
-  'bookId': 1,
-  'customerName': 'avvhjwcu1746178324',
-  'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
-  'quantity': 1,
-  'timestamp': 1746178355659}] ]</msg>
-<msg time="2025-05-02T10:32:41.839608" level="INFO">[{'id': 'oAw9LEN_pajUpzjKZ5vGO', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178355659}]</msg>
-<msg time="2025-05-02T10:32:41.839626" level="TRACE">Return: None</msg>
-<arg>${orders}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-02T10:32:41.839480" elapsed="0.000162"/>
-</kw>
-<return>
-<value>${orders}</value>
-<status status="PASS" start="2025-05-02T10:32:41.839673" elapsed="0.000026"/>
-</return>
-<msg time="2025-05-02T10:32:41.839756" level="TRACE">Return: [{'id': 'oAw9LEN_pajUpzjKZ5vGO',
-  'bookId': 1,
-  'customerName': 'avvhjwcu1746178324',
-  'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
-  'quantity': 1,
-  'timestamp': 1746178355659}]</msg>
-<msg time="2025-05-02T10:32:41.839820" level="INFO">${orders} = [{'id': 'oAw9LEN_pajUpzjKZ5vGO', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178...</msg>
-<var>${orders}</var>
-<status status="PASS" start="2025-05-02T10:32:39.978052" elapsed="1.861781"/>
-</kw>
-<kw name="Order Schema Validator" owner="order_keywords">
-<msg time="2025-05-02T10:32:41.840258" level="TRACE">Arguments: [ ${orders}=[{'id': 'oAw9LEN_pajUpzjKZ5vGO',
-  'bookId': 1,
-  'customerName': 'avvhjwcu1746178324',
-  'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
-  'quantity': 1,
-  'timestamp': 1746178355659}] ]</msg>
 <for flavor="IN">
 <iter>
-<kw name="Validate Order With Schema" owner="order_keywords">
-<msg time="2025-05-02T10:32:41.840683" level="TRACE">Arguments: [ ${order}={'id': 'oAw9LEN_pajUpzjKZ5vGO',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178355659} ]</msg>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.261878" level="TRACE">Arguments: [ ${book}={'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
 <kw name="Validate Response With Schema" owner="common">
-<msg time="2025-05-02T10:32:41.840886" level="TRACE">Arguments: [ ${resp}={'id': 'oAw9LEN_pajUpzjKZ5vGO',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178355659} | ${SCHEMA}='order_schema.json' ]</msg>
+<msg time="2025-05-04T15:08:11.262065" level="TRACE">Arguments: [ ${resp}={'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | ${SCHEMA}='book_schema.json' ]</msg>
 <kw name="Validate Json" owner="JSONSchemaLibrary">
-<msg time="2025-05-02T10:32:41.841054" level="TRACE">Arguments: [ 'order_schema.json' | {'id': 'oAw9LEN_pajUpzjKZ5vGO',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178355659} ]</msg>
-<msg time="2025-05-02T10:32:41.841989" level="TRACE">Return: None</msg>
+<msg time="2025-05-04T15:08:11.262209" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
+<msg time="2025-05-04T15:08:11.264955" level="TRACE">Return: None</msg>
 <arg>${SCHEMA}</arg>
 <arg>${resp}</arg>
 <doc>Validates the sample JSON against the given schema.</doc>
-<status status="PASS" start="2025-05-02T10:32:41.840998" elapsed="0.001023"/>
+<status status="PASS" start="2025-05-04T15:08:11.262156" elapsed="0.002833"/>
 </kw>
-<msg time="2025-05-02T10:32:41.842058" level="TRACE">Return: None</msg>
-<arg>${order}</arg>
-<arg>${ORDER_SCHEMA}</arg>
-<status status="PASS" start="2025-05-02T10:32:41.840791" elapsed="0.001286"/>
-</kw>
-<msg time="2025-05-02T10:32:41.842101" level="TRACE">Return: None</msg>
-<arg>${order}</arg>
-<status status="PASS" start="2025-05-02T10:32:41.840590" elapsed="0.001527"/>
-</kw>
-<var name="${order}">{'id': 'oAw9LEN_pajUpzjKZ5vGO', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 17461783...</var>
-<status status="PASS" start="2025-05-02T10:32:41.840525" elapsed="0.001609"/>
-</iter>
-<var>${order}</var>
-<value>@{orders}</value>
-<status status="PASS" start="2025-05-02T10:32:41.840438" elapsed="0.001717"/>
-</for>
-<msg time="2025-05-02T10:32:41.842183" level="TRACE">Return: None</msg>
-<arg>${orders}</arg>
-<status status="PASS" start="2025-05-02T10:32:41.840149" elapsed="0.002052"/>
-</kw>
-<tag>ValidateOrdersSchema</tag>
-<status status="PASS" start="2025-05-02T10:32:11.206519" elapsed="30.635949"/>
-</test>
-<test id="s1-t2" name="Delete Order And Validate" line="9">
-<kw name="Create A Order With An Available Book" owner="order_keywords" type="SETUP">
-<msg time="2025-05-02T10:32:41.843748" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:41.843859" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' | 'Content-type=application/json' ]</msg>
-<msg time="2025-05-02T10:32:41.843968" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'}</msg>
-<msg time="2025-05-02T10:32:41.844020" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<arg>Content-type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:41.843831" elapsed="0.000206"/>
-</kw>
-<kw name="Get Randomly Availabale Book" owner="book_keywords">
-<msg time="2025-05-02T10:32:41.844245" level="TRACE">Arguments: [  ]</msg>
-<kw name="Get All Books" owner="book_keywords">
-<msg time="2025-05-02T10:32:41.844725" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Api Session" owner="common">
-<msg time="2025-05-02T10:32:41.844889" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:41.845035" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
-<msg time="2025-05-02T10:32:41.845080" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<msg time="2025-05-02T10:32:41.845096" level="DEBUG">Creating session: apisession</msg>
-<msg time="2025-05-02T10:32:41.845168" level="TRACE">Return: &lt;requests.sessions.Session object at 0x00000216EA793ED0&gt;</msg>
-<arg>apisession</arg>
-<arg>${BASE_URL}</arg>
-<arg>verify=True</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-02T10:32:41.844955" elapsed="0.000238"/>
-</kw>
-<msg time="2025-05-02T10:32:41.845225" level="TRACE">Return: None</msg>
-<doc>Creates a session for authentication requests</doc>
-<status status="PASS" start="2025-05-02T10:32:41.844825" elapsed="0.000421"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:41.845360" level="TRACE">Arguments: [ 'apisession' | '/books/' | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:41.845845" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
-<msg time="2025-05-02T10:32:42.405379" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /books/ HTTP/1.1" 200 417</msg>
-<msg time="2025-05-02T10:32:42.405608" level="INFO">GET Request : url=https://simple-books-api.glitch.me/books/ 
- path_url=/books/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:42.405649" level="INFO">GET Response : url=https://simple-books-api.glitch.me/books/ 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '417', 'etag': 'W/"1a1-MfqhfTYtZO2sguD1mJq8Vf41WjU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:38 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs10562-MRS, cache-mrs10562-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178358.183460,VS0,VE355'} 
- body=[{"id":1,"name":"The Russian","type":"fiction","available":true},{"id":2,"name":"Just as I Am","type":"non-fiction","available":false},{"id":3,"name":"The Vanishing Half","type":"fiction","available":true},{"id":4,"name":"The Midnight Library","type":"fiction","available":true},{"id":5,"name":"Untamed","type":"non-fiction","available":true},{"id":6,"name":"Viscount Who Loved Me","type":"fiction","available":true}] 
- </msg>
-<msg time="2025-05-02T10:32:42.405701" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:42.405767" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_BOOKS}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:41.845306" elapsed="0.560475"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.406209" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:42.406339" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:42.406487" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.405906" elapsed="0.000597"/>
-</kw>
-<return>
-<value>${books}</value>
-<status status="PASS" start="2025-05-02T10:32:42.406542" elapsed="0.000028"/>
-</return>
-<msg time="2025-05-02T10:32:42.406630" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:42.406737" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<status status="PASS" start="2025-05-02T10:32:41.844321" elapsed="0.562430"/>
-</kw>
-<kw name="Create List" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.406864" level="TRACE">Arguments: [  ]</msg>
-<msg time="2025-05-02T10:32:42.406891" level="TRACE">Return: []</msg>
-<msg time="2025-05-02T10:32:42.406925" level="INFO">${available_books} = []</msg>
-<var>${available_books}</var>
-<doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.406831" elapsed="0.000106"/>
-</kw>
-<for flavor="IN">
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.407180" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.407223" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:42.407254" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
+<msg time="2025-05-04T15:08:11.265115" level="TRACE">Return: None</msg>
 <arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.407131" elapsed="0.000135"/>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.261967" elapsed="0.003173"/>
 </kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:42.407479" level="TRACE">Arguments: [ [] | {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:42.407520" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
+<msg time="2025-05-04T15:08:11.265167" level="TRACE">Return: None</msg>
 <arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.407425" elapsed="0.000112"/>
+<status status="PASS" start="2025-05-04T15:08:11.261791" elapsed="0.003393"/>
 </kw>
-<status status="PASS" start="2025-05-02T10:32:42.407312" elapsed="0.000246"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.407300" elapsed="0.000275"/>
-</if>
 <var name="${book}">{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:42.407078" elapsed="0.000510"/>
+<status status="PASS" start="2025-05-04T15:08:11.261733" elapsed="0.003468"/>
 </iter>
 <iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.407743" level="TRACE">Arguments: [ {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.407781" level="TRACE">Return: False</msg>
-<msg time="2025-05-02T10:32:42.407811" level="INFO">${is_available} = False</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.407699" elapsed="0.000126"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="NOT RUN" start="2025-05-02T10:32:42.407964" elapsed="0.000011"/>
-</kw>
-<status status="NOT RUN" start="2025-05-02T10:32:42.407863" elapsed="0.000131"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.407854" elapsed="0.000153"/>
-</if>
-<var name="${book}">{'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}</var>
-<status status="PASS" start="2025-05-02T10:32:42.407655" elapsed="0.000365"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.408169" level="TRACE">Arguments: [ {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.408208" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:42.408238" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.408124" elapsed="0.000126"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:42.408431" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}] | {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:42.408477" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.408381" elapsed="0.000113"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:42.408285" elapsed="0.000229"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.408276" elapsed="0.000253"/>
-</if>
-<var name="${book}">{'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:42.408081" elapsed="0.000460"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.408697" level="TRACE">Arguments: [ {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.408736" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:42.408766" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.408652" elapsed="0.000126"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:42.408968" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}] | {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:42.409028" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.408918" elapsed="0.000128"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:42.408814" elapsed="0.000251"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.408806" elapsed="0.000272"/>
-</if>
-<var name="${book}">{'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:42.408606" elapsed="0.000485"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.409240" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.409312" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:42.409345" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.409198" elapsed="0.000160"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:42.409548" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True}] | {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:42.409627" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.409498" elapsed="0.000146"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:42.409396" elapsed="0.000267"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.409387" elapsed="0.000289"/>
-</if>
-<var name="${book}">{'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:42.409153" elapsed="0.000536"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.409837" level="TRACE">Arguments: [ {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:42.409876" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:42.409906" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.409795" elapsed="0.000124"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:42.410109" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}] | {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:42.410197" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.410057" elapsed="0.000158"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:42.409956" elapsed="0.000279"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:42.409947" elapsed="0.000302"/>
-</if>
-<var name="${book}">{'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:42.409750" elapsed="0.000512"/>
-</iter>
-<var>${book}</var>
-<value>@{books}</value>
-<status status="PASS" start="2025-05-02T10:32:42.406970" elapsed="0.003307"/>
-</for>
-<kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.410375" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:42.410473" level="INFO">Length is 5.</msg>
-<msg time="2025-05-02T10:32:42.410490" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:42.410520" level="INFO">${available_count} = 5</msg>
-<var>${available_count}</var>
-<arg>${available_books}</arg>
-<doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.410335" elapsed="0.000197"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.410657" level="TRACE">Arguments: [ 'random.randint(0, 5-1)' | 'random' ]</msg>
-<msg time="2025-05-02T10:32:42.410724" level="TRACE">Return: 3</msg>
-<msg time="2025-05-02T10:32:42.410757" level="INFO">${random_index} = 3</msg>
-<var>${random_index}</var>
-<arg>random.randint(0, ${available_count}-1)</arg>
-<arg>random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.410590" elapsed="0.000179"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-05-02T10:32:42.410884" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] | 3 ]</msg>
-<msg time="2025-05-02T10:32:42.410982" level="TRACE">Return: {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:42.411018" level="INFO">${random_book} = {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<var>${random_book}</var>
-<arg>${available_books}</arg>
-<arg>${random_index}</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.410829" elapsed="0.000201"/>
-</kw>
-<return>
-<value>${random_book}</value>
-<status status="PASS" start="2025-05-02T10:32:42.411056" elapsed="0.000017"/>
-</return>
-<msg time="2025-05-02T10:32:42.411117" level="TRACE">Return: {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:42.411153" level="INFO">${book} = {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<var>${book}</var>
-<doc>Returns a randomly selected book that is available</doc>
-<status status="PASS" start="2025-05-02T10:32:41.844179" elapsed="0.566986"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.411266" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'id' ]</msg>
-<msg time="2025-05-02T10:32:42.411306" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:42.411337" level="INFO">${book_id} = 5</msg>
-<var>${book_id}</var>
-<arg>${book}</arg>
-<arg>id</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.411221" elapsed="0.000128"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.411436" level="TRACE">Arguments: [ 'bookId=${book_id}' | 'customerName=${CLIENT_NAME}' ]</msg>
-<msg time="2025-05-02T10:32:42.411542" level="TRACE">Return: {'bookId': 5, 'customerName': 'avvhjwcu1746178324'}</msg>
-<msg time="2025-05-02T10:32:42.411580" level="INFO">${body} = {'bookId': 5, 'customerName': 'avvhjwcu1746178324'}</msg>
-<var>${body}</var>
-<arg>bookId=${book_id}</arg>
-<arg>customerName=${CLIENT_NAME}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.411414" elapsed="0.000179"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:42.411724" level="TRACE">Arguments: [ 'apisession' | '/orders/' | json={'bookId': 5, 'customerName': 'avvhjwcu1746178324'} | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'} ]</msg>
-<msg time="2025-05-02T10:32:42.781523" level="DEBUG">https://simple-books-api.glitch.me:443 "POST /orders/ HTTP/1.1" 201 50</msg>
-<msg time="2025-05-02T10:32:42.781994" level="INFO">POST Request : url=https://simple-books-api.glitch.me/orders/ 
- path_url=/orders/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json', 'Content-Length': '51'} 
- body=b'{"bookId": 5, "customerName": "avvhjwcu1746178324"}' 
- </msg>
-<msg time="2025-05-02T10:32:42.782097" level="INFO">POST Response : url=https://simple-books-api.glitch.me/orders/ 
- status=201, reason=Created 
- headers={'Connection': 'keep-alive', 'Content-Length': '50', 'etag': 'W/"32-1HB6Kjyh742sYKrFpD+ccVANIf8"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:38 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs10562-MRS, cache-mrs10562-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178359.589676,VS0,VE324'} 
- body={"created":true,"orderId":"fo0kl8GbrqrYGb668XvhE"} 
- </msg>
-<msg time="2025-05-02T10:32:42.782189" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:42.782385" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}</arg>
-<arg>json=${body}</arg>
-<arg>headers=${header}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.411650" elapsed="0.370780"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.783591" level="TRACE">Arguments: [ {'created': True, 'orderId': 'fo0kl8GbrqrYGb668XvhE'} ]</msg>
-<msg time="2025-05-02T10:32:42.783732" level="TRACE">Return: {'created': True, 'orderId': 'fo0kl8GbrqrYGb668XvhE'}</msg>
-<msg time="2025-05-02T10:32:42.783842" level="INFO">${order} = {'created': True, 'orderId': 'fo0kl8GbrqrYGb668XvhE'}</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.782720" elapsed="0.001159"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:42.784263" level="TRACE">Arguments: [ {'created': True, 'orderId': 'fo0kl8GbrqrYGb668XvhE'} | 'orderId' ]</msg>
-<msg time="2025-05-02T10:32:42.784405" level="TRACE">Return: 'fo0kl8GbrqrYGb668XvhE'</msg>
-<msg time="2025-05-02T10:32:42.784491" level="INFO">${id} = fo0kl8GbrqrYGb668XvhE</msg>
-<var>${id}</var>
-<arg>${order}</arg>
-<arg>orderId</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.784103" elapsed="0.000427"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.784835" level="TRACE">Arguments: [ '${ORDER_ID}' | '${id}' ]</msg>
-<msg time="2025-05-02T10:32:42.785093" level="INFO">${ORDER_ID} = fo0kl8GbrqrYGb668XvhE</msg>
-<msg time="2025-05-02T10:32:42.785139" level="TRACE">Return: None</msg>
-<arg>${ORDER_ID}</arg>
-<arg>${id}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.784759" elapsed="0.000432"/>
-</kw>
-<msg time="2025-05-02T10:32:42.785276" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:41.843672" elapsed="0.941653"/>
-</kw>
-<kw name="Delete Order" owner="order_keywords">
-<msg time="2025-05-02T10:32:42.786325" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:42.786650" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:42.786960" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:42.787103" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.786571" elapsed="0.000572"/>
-</kw>
-<kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:42.787580" level="TRACE">Arguments: [ 'apisession' | '/orders/fo0kl8GbrqrYGb668XvhE' | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='204' ]</msg>
-<msg time="2025-05-02T10:32:43.458480" level="DEBUG">https://simple-books-api.glitch.me:443 "DELETE /orders/fo0kl8GbrqrYGb668XvhE HTTP/1.1" 204 0</msg>
-<msg time="2025-05-02T10:32:43.458957" level="INFO">DELETE Request : url=https://simple-books-api.glitch.me/orders/fo0kl8GbrqrYGb668XvhE 
- path_url=/orders/fo0kl8GbrqrYGb668XvhE 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-Length': '0'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:43.459065" level="INFO">DELETE Response : url=https://simple-books-api.glitch.me/orders/fo0kl8GbrqrYGb668XvhE 
- status=204, reason=No Content 
- headers={'Connection': 'keep-alive', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:39 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050095-MRS, cache-mrs10562-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178359.965442,VS0,VE625'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:43.459194" level="TRACE">Return: &lt;Response [204]&gt;</msg>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}${ORDER_ID}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=204</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:42.787337" elapsed="0.671964"/>
-</kw>
-<msg time="2025-05-02T10:32:43.459452" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:42.786074" elapsed="0.673448"/>
-</kw>
-<tag>deleteOrder</tag>
-<status status="PASS" start="2025-05-02T10:32:41.843303" elapsed="1.616984"/>
-</test>
-<test id="s1-t3" name="Update Order And Verify Update" line="24">
-<kw name="Create A Order With An Available Book" owner="order_keywords" type="SETUP">
-<msg time="2025-05-02T10:32:43.462682" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:43.462814" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' | 'Content-type=application/json' ]</msg>
-<msg time="2025-05-02T10:32:43.462929" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'}</msg>
-<msg time="2025-05-02T10:32:43.462984" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<arg>Content-type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:43.462776" elapsed="0.000223"/>
-</kw>
-<kw name="Get Randomly Availabale Book" owner="book_keywords">
-<msg time="2025-05-02T10:32:43.463208" level="TRACE">Arguments: [  ]</msg>
-<kw name="Get All Books" owner="book_keywords">
-<msg time="2025-05-02T10:32:43.463342" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Api Session" owner="common">
-<msg time="2025-05-02T10:32:43.463472" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:43.463607" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
-<msg time="2025-05-02T10:32:43.463692" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<msg time="2025-05-02T10:32:43.463709" level="DEBUG">Creating session: apisession</msg>
-<msg time="2025-05-02T10:32:43.463781" level="TRACE">Return: &lt;requests.sessions.Session object at 0x00000216EA841220&gt;</msg>
-<arg>apisession</arg>
-<arg>${BASE_URL}</arg>
-<arg>verify=True</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-02T10:32:43.463531" elapsed="0.000273"/>
-</kw>
-<msg time="2025-05-02T10:32:43.463836" level="TRACE">Return: None</msg>
-<doc>Creates a session for authentication requests</doc>
-<status status="PASS" start="2025-05-02T10:32:43.463414" elapsed="0.000439"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:43.463970" level="TRACE">Arguments: [ 'apisession' | '/books/' | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:43.464466" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
-<msg time="2025-05-02T10:32:44.007639" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /books/ HTTP/1.1" 200 417</msg>
-<msg time="2025-05-02T10:32:44.008573" level="INFO">GET Request : url=https://simple-books-api.glitch.me/books/ 
- path_url=/books/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:44.008774" level="INFO">GET Response : url=https://simple-books-api.glitch.me/books/ 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '417', 'etag': 'W/"1a1-MfqhfTYtZO2sguD1mJq8Vf41WjU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:40 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050110-MRS, cache-mrs1050110-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178360.738648,VS0,VE398'} 
- body=[{"id":1,"name":"The Russian","type":"fiction","available":true},{"id":2,"name":"Just as I Am","type":"non-fiction","available":false},{"id":3,"name":"The Vanishing Half","type":"fiction","available":true},{"id":4,"name":"The Midnight Library","type":"fiction","available":true},{"id":5,"name":"Untamed","type":"non-fiction","available":true},{"id":6,"name":"Viscount Who Loved Me","type":"fiction","available":true}] 
- </msg>
-<msg time="2025-05-02T10:32:44.008936" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:44.009128" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_BOOKS}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:43.463913" elapsed="0.545263"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.010403" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:44.010785" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:44.011126" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.009488" elapsed="0.001682"/>
-</kw>
-<return>
-<value>${books}</value>
-<status status="PASS" start="2025-05-02T10:32:44.011272" elapsed="0.000068"/>
-</return>
-<msg time="2025-05-02T10:32:44.011515" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:44.011895" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<status status="PASS" start="2025-05-02T10:32:43.463286" elapsed="0.548656"/>
-</kw>
-<kw name="Create List" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.012259" level="TRACE">Arguments: [  ]</msg>
-<msg time="2025-05-02T10:32:44.012347" level="TRACE">Return: []</msg>
-<msg time="2025-05-02T10:32:44.012463" level="INFO">${available_books} = []</msg>
-<var>${available_books}</var>
-<doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.012164" elapsed="0.000341"/>
-</kw>
-<for flavor="IN">
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.013253" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.013388" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:44.013490" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.013096" elapsed="0.000434"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:44.014233" level="TRACE">Arguments: [ [] | {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:44.014374" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.014042" elapsed="0.000391"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:44.013679" elapsed="0.000819"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.013638" elapsed="0.000915"/>
-</if>
-<var name="${book}">{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:44.012936" elapsed="0.001665"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.015147" level="TRACE">Arguments: [ {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.015279" level="TRACE">Return: False</msg>
-<msg time="2025-05-02T10:32:44.015388" level="INFO">${is_available} = False</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.014979" elapsed="0.000452"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="NOT RUN" start="2025-05-02T10:32:44.016099" elapsed="0.000039"/>
-</kw>
-<status status="NOT RUN" start="2025-05-02T10:32:44.015695" elapsed="0.000516"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.015657" elapsed="0.000602"/>
-</if>
-<var name="${book}">{'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}</var>
-<status status="PASS" start="2025-05-02T10:32:44.014822" elapsed="0.001481"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.016889" level="TRACE">Arguments: [ {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.017038" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:44.017139" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.016716" elapsed="0.000461"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:44.017825" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}] | {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:44.017973" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.017644" elapsed="0.000384"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:44.017296" elapsed="0.000795"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.017267" elapsed="0.000874"/>
-</if>
-<var name="${book}">{'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:44.016539" elapsed="0.001643"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.018691" level="TRACE">Arguments: [ {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.018814" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:44.018914" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.018528" elapsed="0.000424"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:44.019566" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}] | {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:44.019774" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.019399" elapsed="0.000429"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:44.019066" elapsed="0.000825"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.019040" elapsed="0.000894"/>
-</if>
-<var name="${book}">{'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:44.018382" elapsed="0.001592"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.020494" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.020645" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:44.020750" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.020330" elapsed="0.000461"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:44.021443" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True}] | {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:44.021719" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.021267" elapsed="0.000509"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:44.020911" elapsed="0.000930"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.020882" elapsed="0.001026"/>
-</if>
-<var name="${book}">{'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:44.020179" elapsed="0.001770"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.022440" level="TRACE">Arguments: [ {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:44.022571" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:44.022682" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.022297" elapsed="0.000430"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:44.023347" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}] | {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:44.023628" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.023178" elapsed="0.000511"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:44.022844" elapsed="0.000910"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:44.022816" elapsed="0.000987"/>
-</if>
-<var name="${book}">{'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:44.022151" elapsed="0.001692"/>
-</iter>
-<var>${book}</var>
-<value>@{books}</value>
-<status status="PASS" start="2025-05-02T10:32:44.012634" elapsed="0.011241"/>
-</for>
-<kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.023982" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:44.024155" level="INFO">Length is 5.</msg>
-<msg time="2025-05-02T10:32:44.024176" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:44.024213" level="INFO">${available_count} = 5</msg>
-<var>${available_count}</var>
-<arg>${available_books}</arg>
-<doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.023936" elapsed="0.000289"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.024363" level="TRACE">Arguments: [ 'random.randint(0, 5-1)' | 'random' ]</msg>
-<msg time="2025-05-02T10:32:44.024430" level="TRACE">Return: 3</msg>
-<msg time="2025-05-02T10:32:44.024466" level="INFO">${random_index} = 3</msg>
-<var>${random_index}</var>
-<arg>random.randint(0, ${available_count}-1)</arg>
-<arg>random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.024289" elapsed="0.000189"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-05-02T10:32:44.024602" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] | 3 ]</msg>
-<msg time="2025-05-02T10:32:44.024700" level="TRACE">Return: {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:44.024737" level="INFO">${random_book} = {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<var>${random_book}</var>
-<arg>${available_books}</arg>
-<arg>${random_index}</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.024540" elapsed="0.000210"/>
-</kw>
-<return>
-<value>${random_book}</value>
-<status status="PASS" start="2025-05-02T10:32:44.024777" elapsed="0.000016"/>
-</return>
-<msg time="2025-05-02T10:32:44.024840" level="TRACE">Return: {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:44.024877" level="INFO">${book} = {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</msg>
-<var>${book}</var>
-<doc>Returns a randomly selected book that is available</doc>
-<status status="PASS" start="2025-05-02T10:32:43.463145" elapsed="0.561745"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.024995" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'id' ]</msg>
-<msg time="2025-05-02T10:32:44.025032" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:44.025063" level="INFO">${book_id} = 5</msg>
-<var>${book_id}</var>
-<arg>${book}</arg>
-<arg>id</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.024948" elapsed="0.000127"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.025164" level="TRACE">Arguments: [ 'bookId=${book_id}' | 'customerName=${CLIENT_NAME}' ]</msg>
-<msg time="2025-05-02T10:32:44.025279" level="TRACE">Return: {'bookId': 5, 'customerName': 'avvhjwcu1746178324'}</msg>
-<msg time="2025-05-02T10:32:44.025320" level="INFO">${body} = {'bookId': 5, 'customerName': 'avvhjwcu1746178324'}</msg>
-<var>${body}</var>
-<arg>bookId=${book_id}</arg>
-<arg>customerName=${CLIENT_NAME}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.025140" elapsed="0.000194"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:44.025479" level="TRACE">Arguments: [ 'apisession' | '/orders/' | json={'bookId': 5, 'customerName': 'avvhjwcu1746178324'} | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'} ]</msg>
-<msg time="2025-05-02T10:32:44.414983" level="DEBUG">https://simple-books-api.glitch.me:443 "POST /orders/ HTTP/1.1" 201 50</msg>
-<msg time="2025-05-02T10:32:44.415579" level="INFO">POST Request : url=https://simple-books-api.glitch.me/orders/ 
- path_url=/orders/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json', 'Content-Length': '51'} 
- body=b'{"bookId": 5, "customerName": "avvhjwcu1746178324"}' 
- </msg>
-<msg time="2025-05-02T10:32:44.415708" level="INFO">POST Response : url=https://simple-books-api.glitch.me/orders/ 
- status=201, reason=Created 
- headers={'Connection': 'keep-alive', 'Content-Length': '50', 'etag': 'W/"32-73a4/AVLNltZRwbDiHBiXzXeeuk"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:40 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050110-MRS, cache-mrs1050110-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178360.205389,VS0,VE342'} 
- body={"created":true,"orderId":"XN-ocM2dQHXJ1FO4Bp6fD"} 
- </msg>
-<msg time="2025-05-02T10:32:44.415816" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:44.415993" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}</arg>
-<arg>json=${body}</arg>
-<arg>headers=${header}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.025396" elapsed="0.390647"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.417391" level="TRACE">Arguments: [ {'created': True, 'orderId': 'XN-ocM2dQHXJ1FO4Bp6fD'} ]</msg>
-<msg time="2025-05-02T10:32:44.417578" level="TRACE">Return: {'created': True, 'orderId': 'XN-ocM2dQHXJ1FO4Bp6fD'}</msg>
-<msg time="2025-05-02T10:32:44.417712" level="INFO">${order} = {'created': True, 'orderId': 'XN-ocM2dQHXJ1FO4Bp6fD'}</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.416364" elapsed="0.002361"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.419239" level="TRACE">Arguments: [ {'created': True, 'orderId': 'XN-ocM2dQHXJ1FO4Bp6fD'} | 'orderId' ]</msg>
-<msg time="2025-05-02T10:32:44.419413" level="TRACE">Return: 'XN-ocM2dQHXJ1FO4Bp6fD'</msg>
-<msg time="2025-05-02T10:32:44.419534" level="INFO">${id} = XN-ocM2dQHXJ1FO4Bp6fD</msg>
-<var>${id}</var>
-<arg>${order}</arg>
-<arg>orderId</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.419019" elapsed="0.000559"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.419896" level="TRACE">Arguments: [ '${ORDER_ID}' | '${id}' ]</msg>
-<msg time="2025-05-02T10:32:44.420224" level="INFO">${ORDER_ID} = XN-ocM2dQHXJ1FO4Bp6fD</msg>
-<msg time="2025-05-02T10:32:44.420278" level="TRACE">Return: None</msg>
-<arg>${ORDER_ID}</arg>
-<arg>${id}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.419812" elapsed="0.000526"/>
-</kw>
-<msg time="2025-05-02T10:32:44.420441" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:43.462590" elapsed="0.957908"/>
-</kw>
-<kw name="Get Order By ID" owner="order_keywords">
-<msg time="2025-05-02T10:32:44.421677" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.422033" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:44.422466" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:44.422650" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.421943" elapsed="0.000756"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:44.423404" level="TRACE">Arguments: [ 'apisession' | '/orders/XN-ocM2dQHXJ1FO4Bp6fD' | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:44.898769" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /orders/XN-ocM2dQHXJ1FO4Bp6fD HTTP/1.1" 200 195</msg>
-<msg time="2025-05-02T10:32:44.898984" level="INFO">GET Request : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- path_url=/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:44.899022" level="INFO">GET Response : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '195', 'etag': 'W/"c3-OEZNVuemM35Nln03W4MxYA0whNg"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:41 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050110-MRS, cache-mrs1050110-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178361.604552,VS0,VE428'} 
- body={"id":"XN-ocM2dQHXJ1FO4Bp6fD","bookId":5,"customerName":"avvhjwcu1746178324","createdBy":"e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b","quantity":1,"timestamp":1746178360290} 
- </msg>
-<msg time="2025-05-02T10:32:44.899061" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:44.899124" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}${ORDER_ID}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.422998" elapsed="0.476141"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.899575" level="TRACE">Arguments: [ {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} ]</msg>
-<msg time="2025-05-02T10:32:44.899645" level="TRACE">Return: {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290}</msg>
-<msg time="2025-05-02T10:32:44.899704" level="INFO">${order} = {'id': 'XN-ocM2dQHXJ1FO4Bp6fD', 'bookId': 5, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 17461783...</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.899263" elapsed="0.000456"/>
-</kw>
-<return>
-<value>${order}</value>
-<status status="PASS" start="2025-05-02T10:32:44.899752" elapsed="0.000025"/>
-</return>
-<msg time="2025-05-02T10:32:44.899833" level="TRACE">Return: {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290}</msg>
-<msg time="2025-05-02T10:32:44.899893" level="INFO">${order_befor_update} = {'id': 'XN-ocM2dQHXJ1FO4Bp6fD', 'bookId': 5, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 17461783...</msg>
-<var>${order_befor_update}</var>
-<status status="PASS" start="2025-05-02T10:32:44.421355" elapsed="0.478552"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:44.900267" level="TRACE">Arguments: [ {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} | 'customerName' ]</msg>
-<msg time="2025-05-02T10:32:44.900338" level="TRACE">Return: 'avvhjwcu1746178324'</msg>
-<msg time="2025-05-02T10:32:44.900375" level="INFO">${customer_name_before_update} = avvhjwcu1746178324</msg>
-<var>${customer_name_before_update}</var>
-<arg>${order_befor_update}</arg>
-<arg>customerName</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.900195" elapsed="0.000197"/>
-</kw>
-<kw name="Update An Order By ID" owner="order_keywords">
-<msg time="2025-05-02T10:32:44.900755" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.900863" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:44.900970" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:44.901019" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.900836" elapsed="0.000196"/>
-</kw>
-<kw name="Generate Random String" owner="String">
-<msg time="2025-05-02T10:32:44.901174" level="TRACE">Arguments: [ 8 | '[LOWER]' ]</msg>
-<msg time="2025-05-02T10:32:44.901223" level="TRACE">Return: 'ijcqjrtr'</msg>
-<msg time="2025-05-02T10:32:44.901255" level="INFO">${customer_name} = ijcqjrtr</msg>
-<var>${customer_name}</var>
-<arg>8</arg>
-<arg>[LOWER]</arg>
-<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.901099" elapsed="0.000169"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.901357" level="TRACE">Arguments: [ 'customerName=${customer_name}' ]</msg>
-<msg time="2025-05-02T10:32:44.901437" level="TRACE">Return: {'customerName': 'ijcqjrtr'}</msg>
-<msg time="2025-05-02T10:32:44.901475" level="INFO">${body} = {'customerName': 'ijcqjrtr'}</msg>
-<var>${body}</var>
-<arg>customerName=${customer_name}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.901334" elapsed="0.000153"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:44.901590" level="TRACE">Arguments: [ 'XN-ocM2dQHXJ1FO4Bp6fD' ]</msg>
-<msg time="2025-05-02T10:32:44.901620" level="TRACE">Return: 'XN-ocM2dQHXJ1FO4Bp6fD'</msg>
-<msg time="2025-05-02T10:32:44.901649" level="INFO">${id} = XN-ocM2dQHXJ1FO4Bp6fD</msg>
-<var>${id}</var>
-<arg>${ORDER_ID}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.901546" elapsed="0.000115"/>
-</kw>
-<kw name="PATCH On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:44.901821" level="TRACE">Arguments: [ 'apisession' | '/orders/XN-ocM2dQHXJ1FO4Bp6fD' | json={'customerName': 'ijcqjrtr'} | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='204' ]</msg>
-<msg time="2025-05-02T10:32:45.199777" level="DEBUG">https://simple-books-api.glitch.me:443 "PATCH /orders/XN-ocM2dQHXJ1FO4Bp6fD HTTP/1.1" 204 0</msg>
-<msg time="2025-05-02T10:32:45.199962" level="INFO">PATCH Request : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- path_url=/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-Length': '28', 'Content-Type': 'application/json'} 
- body=b'{"customerName": "ijcqjrtr"}' 
- </msg>
-<msg time="2025-05-02T10:32:45.199993" level="INFO">PATCH Response : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- status=204, reason=No Content 
- headers={'Connection': 'keep-alive', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:41 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050110-MRS, cache-mrs1050110-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178361.081369,VS0,VE252'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:45.200040" level="TRACE">Return: &lt;Response [204]&gt;</msg>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}${ORDER_ID}</arg>
-<arg>json=${body}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=204</arg>
-<doc>Sends a PATCH request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:44.901717" elapsed="0.298356"/>
-</kw>
-<msg time="2025-05-02T10:32:45.200129" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:44.900667" elapsed="0.299481"/>
-</kw>
-<kw name="Get Order By ID" owner="order_keywords">
-<msg time="2025-05-02T10:32:45.200646" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.200770" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:45.200878" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:45.200930" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.200740" elapsed="0.000204"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:45.201100" level="TRACE">Arguments: [ 'apisession' | '/orders/XN-ocM2dQHXJ1FO4Bp6fD' | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:45.482838" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /orders/XN-ocM2dQHXJ1FO4Bp6fD HTTP/1.1" 200 185</msg>
-<msg time="2025-05-02T10:32:45.483495" level="INFO">GET Request : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- path_url=/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:45.483624" level="INFO">GET Response : url=https://simple-books-api.glitch.me/orders/XN-ocM2dQHXJ1FO4Bp6fD 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '185', 'etag': 'W/"b9-yxqAP/v6HPQGdps9Z1iM8K9tjL8"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:41 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs1050110-MRS, cache-mrs1050110-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178361.380481,VS0,VE235'} 
- body={"id":"XN-ocM2dQHXJ1FO4Bp6fD","bookId":5,"customerName":"ijcqjrtr","createdBy":"e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b","quantity":1,"timestamp":1746178360290} 
- </msg>
-<msg time="2025-05-02T10:32:45.483764" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:45.483966" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}${ORDER_ID}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.201010" elapsed="0.283007"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.485310" level="TRACE">Arguments: [ {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'ijcqjrtr',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} ]</msg>
-<msg time="2025-05-02T10:32:45.485537" level="TRACE">Return: {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'ijcqjrtr',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290}</msg>
-<msg time="2025-05-02T10:32:45.485733" level="INFO">${order} = {'id': 'XN-ocM2dQHXJ1FO4Bp6fD', 'bookId': 5, 'customerName': 'ijcqjrtr', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178360290}</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.484355" elapsed="0.001425"/>
-</kw>
-<return>
-<value>${order}</value>
-<status status="PASS" start="2025-05-02T10:32:45.485882" elapsed="0.000068"/>
-</return>
-<msg time="2025-05-02T10:32:45.486148" level="TRACE">Return: {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'ijcqjrtr',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290}</msg>
-<msg time="2025-05-02T10:32:45.486348" level="INFO">${order_after_update} = {'id': 'XN-ocM2dQHXJ1FO4Bp6fD', 'bookId': 5, 'customerName': 'ijcqjrtr', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178360290}</msg>
-<var>${order_after_update}</var>
-<status status="PASS" start="2025-05-02T10:32:45.200535" elapsed="0.285859"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.487418" level="TRACE">Arguments: [ {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'ijcqjrtr',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} | 'customerName' ]</msg>
-<msg time="2025-05-02T10:32:45.487666" level="TRACE">Return: 'ijcqjrtr'</msg>
-<msg time="2025-05-02T10:32:45.487794" level="INFO">${customer_name_after_update} = ijcqjrtr</msg>
-<var>${customer_name_after_update}</var>
-<arg>${order_after_update}</arg>
-<arg>customerName</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.487152" elapsed="0.000688"/>
-</kw>
-<kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.488770" level="TRACE">Arguments: [ {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} | {'id': 'XN-ocM2dQHXJ1FO4Bp6fD',
- 'bookId': 5,
- 'customerName': 'ijcqjrtr',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178360290} ]</msg>
-<msg time="2025-05-02T10:32:45.489089" level="DEBUG">Argument types are:
-&lt;class 'dict'&gt;
-&lt;class 'dict'&gt;</msg>
-<msg time="2025-05-02T10:32:45.489183" level="TRACE">Return: None</msg>
-<arg>${order_befor_update}</arg>
-<arg>${order_after_update}</arg>
-<doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.488477" elapsed="0.000771"/>
-</kw>
-<tag>ValidateUpdate</tag>
-<status status="PASS" start="2025-05-02T10:32:43.462180" elapsed="2.027747"/>
-</test>
-<test id="s1-t4" name="Retreive An Order And Validate Order Json with Schema" line="18">
-<kw name="Create A Order With An Available Book" owner="order_keywords" type="SETUP">
-<msg time="2025-05-02T10:32:45.492235" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.492342" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' | 'Content-type=application/json' ]</msg>
-<msg time="2025-05-02T10:32:45.492451" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'}</msg>
-<msg time="2025-05-02T10:32:45.492504" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<arg>Content-type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.492315" elapsed="0.000203"/>
-</kw>
-<kw name="Get Randomly Availabale Book" owner="book_keywords">
-<msg time="2025-05-02T10:32:45.492726" level="TRACE">Arguments: [  ]</msg>
-<kw name="Get All Books" owner="book_keywords">
-<msg time="2025-05-02T10:32:45.492861" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Api Session" owner="common">
-<msg time="2025-05-02T10:32:45.492996" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:45.493135" level="TRACE">Arguments: [ 'apisession' | 'https://simple-books-api.glitch.me/' | verify=True ]</msg>
-<msg time="2025-05-02T10:32:45.493175" level="INFO">Creating Session using : alias=apisession, url=https://simple-books-api.glitch.me/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<msg time="2025-05-02T10:32:45.493192" level="DEBUG">Creating session: apisession</msg>
-<msg time="2025-05-02T10:32:45.493260" level="TRACE">Return: &lt;requests.sessions.Session object at 0x00000216EA840180&gt;</msg>
-<arg>apisession</arg>
-<arg>${BASE_URL}</arg>
-<arg>verify=True</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-05-02T10:32:45.493055" elapsed="0.000227"/>
-</kw>
-<msg time="2025-05-02T10:32:45.493311" level="TRACE">Return: None</msg>
-<doc>Creates a session for authentication requests</doc>
-<status status="PASS" start="2025-05-02T10:32:45.492939" elapsed="0.000389"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:45.493437" level="TRACE">Arguments: [ 'apisession' | '/books/' | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:45.493961" level="DEBUG">Starting new HTTPS connection (1): simple-books-api.glitch.me:443</msg>
-<msg time="2025-05-02T10:32:45.776894" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /books/ HTTP/1.1" 200 417</msg>
-<msg time="2025-05-02T10:32:45.777456" level="INFO">GET Request : url=https://simple-books-api.glitch.me/books/ 
- path_url=/books/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:45.777604" level="INFO">GET Response : url=https://simple-books-api.glitch.me/books/ 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '417', 'etag': 'W/"1a1-MfqhfTYtZO2sguD1mJq8Vf41WjU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:41 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs10565-MRS, cache-mrs10565-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178362.772194,VS0,VE137'} 
- body=[{"id":1,"name":"The Russian","type":"fiction","available":true},{"id":2,"name":"Just as I Am","type":"non-fiction","available":false},{"id":3,"name":"The Vanishing Half","type":"fiction","available":true},{"id":4,"name":"The Midnight Library","type":"fiction","available":true},{"id":5,"name":"Untamed","type":"non-fiction","available":true},{"id":6,"name":"Viscount Who Loved Me","type":"fiction","available":true}] 
- </msg>
-<msg time="2025-05-02T10:32:45.777728" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:45.777879" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_BOOKS}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.493385" elapsed="0.284546"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.779110" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:45.779526" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:45.779883" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.778215" elapsed="0.001714"/>
-</kw>
-<return>
-<value>${books}</value>
-<status status="PASS" start="2025-05-02T10:32:45.780040" elapsed="0.000070"/>
-</return>
-<msg time="2025-05-02T10:32:45.780295" level="TRACE">Return: [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}]</msg>
-<msg time="2025-05-02T10:32:45.780656" level="INFO">${books} = [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}, {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}, {'id': 3, 'name': 'The Vanishing Half', 'type': '...</msg>
-<var>${books}</var>
-<status status="PASS" start="2025-05-02T10:32:45.492803" elapsed="0.287898"/>
-</kw>
-<kw name="Create List" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.781006" level="TRACE">Arguments: [  ]</msg>
-<msg time="2025-05-02T10:32:45.781097" level="TRACE">Return: []</msg>
-<msg time="2025-05-02T10:32:45.781205" level="INFO">${available_books} = []</msg>
-<var>${available_books}</var>
-<doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.780916" elapsed="0.000330"/>
-</kw>
-<for flavor="IN">
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.782131" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.782290" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:45.782401" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.781963" elapsed="0.000498"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:45.783188" level="TRACE">Arguments: [ [] | {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:45.783325" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.783002" elapsed="0.000378"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:45.782609" elapsed="0.000850"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.782571" elapsed="0.000937"/>
-</if>
-<var name="${book}">{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:45.781772" elapsed="0.001781"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.784052" level="TRACE">Arguments: [ {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.784192" level="TRACE">Return: False</msg>
-<msg time="2025-05-02T10:32:45.784295" level="INFO">${is_available} = False</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.783909" elapsed="0.000427"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="NOT RUN" start="2025-05-02T10:32:45.784860" elapsed="0.000037"/>
-</kw>
-<status status="NOT RUN" start="2025-05-02T10:32:45.784486" elapsed="0.000477"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.784447" elapsed="0.000563"/>
-</if>
-<var name="${book}">{'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}</var>
-<status status="PASS" start="2025-05-02T10:32:45.783758" elapsed="0.001296"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.785580" level="TRACE">Arguments: [ {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.785722" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:45.785827" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.785411" elapsed="0.000458"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:45.786534" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}] | {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:45.786689" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.786348" elapsed="0.000398"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:45.785995" elapsed="0.000813"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.785965" elapsed="0.000887"/>
-</if>
-<var name="${book}">{'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:45.785259" elapsed="0.001634"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.787413" level="TRACE">Arguments: [ {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.787561" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:45.787661" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.787265" elapsed="0.000436"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:45.788305" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}] | {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:45.788529" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.788142" elapsed="0.000445"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:45.787819" elapsed="0.000831"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.787791" elapsed="0.000903"/>
-</if>
-<var name="${book}">{'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:45.787112" elapsed="0.001622"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.789221" level="TRACE">Arguments: [ {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.789351" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:45.789466" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.789080" elapsed="0.000432"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:45.790281" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True}] | {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:45.790563" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.790089" elapsed="0.000534"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:45.789670" elapsed="0.001022"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.789626" elapsed="0.001112"/>
-</if>
-<var name="${book}">{'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:45.788937" elapsed="0.001842"/>
-</iter>
-<iter>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.791318" level="TRACE">Arguments: [ {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} | 'available' ]</msg>
-<msg time="2025-05-02T10:32:45.791458" level="TRACE">Return: True</msg>
-<msg time="2025-05-02T10:32:45.791545" level="INFO">${is_available} = True</msg>
-<var>${is_available}</var>
-<arg>${book}</arg>
-<arg>available</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.791168" elapsed="0.000471"/>
-</kw>
-<if>
-<branch type="IF" condition="${is_available} == ${TRUE}">
-<kw name="Append To List" owner="Collections">
-<msg time="2025-05-02T10:32:45.792206" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}] | {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
-<msg time="2025-05-02T10:32:45.792464" level="TRACE">Return: None</msg>
-<arg>${available_books}</arg>
-<arg>${book}</arg>
-<doc>Adds ``values`` to the end of ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.792054" elapsed="0.000459"/>
-</kw>
-<status status="PASS" start="2025-05-02T10:32:45.791751" elapsed="0.000818"/>
-</branch>
-<status status="PASS" start="2025-05-02T10:32:45.791725" elapsed="0.000884"/>
-</if>
-<var name="${book}">{'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True}</var>
-<status status="PASS" start="2025-05-02T10:32:45.791013" elapsed="0.001632"/>
-</iter>
-<var>${book}</var>
-<value>@{books}</value>
-<status status="PASS" start="2025-05-02T10:32:45.781441" elapsed="0.011250"/>
-</for>
-<kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.793188" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] ]</msg>
-<msg time="2025-05-02T10:32:45.793526" level="INFO">Length is 5.</msg>
-<msg time="2025-05-02T10:32:45.793581" level="TRACE">Return: 5</msg>
-<msg time="2025-05-02T10:32:45.793682" level="INFO">${available_count} = 5</msg>
-<var>${available_count}</var>
-<arg>${available_books}</arg>
-<doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.792874" elapsed="0.000850"/>
-</kw>
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.794123" level="TRACE">Arguments: [ 'random.randint(0, 5-1)' | 'random' ]</msg>
-<msg time="2025-05-02T10:32:45.794343" level="TRACE">Return: 0</msg>
-<msg time="2025-05-02T10:32:45.794448" level="INFO">${random_index} = 0</msg>
-<var>${random_index}</var>
-<arg>random.randint(0, ${available_count}-1)</arg>
-<arg>random</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.793933" elapsed="0.000552"/>
-</kw>
-<kw name="Get From List" owner="Collections">
-<msg time="2025-05-02T10:32:45.794822" level="TRACE">Arguments: [ [{'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True},
- {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True},
- {'id': 4,
-  'name': 'The Midnight Library',
-  'type': 'fiction',
-  'available': True},
- {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True},
- {'id': 6,
-  'name': 'Viscount Who Loved Me',
-  'type': 'fiction',
-  'available': True}] | 0 ]</msg>
-<msg time="2025-05-02T10:32:45.795123" level="TRACE">Return: {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:45.795226" level="INFO">${random_book} = {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<var>${random_book}</var>
-<arg>${available_books}</arg>
-<arg>${random_index}</arg>
-<doc>Returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.794664" elapsed="0.000599"/>
-</kw>
-<return>
-<value>${random_book}</value>
-<status status="PASS" start="2025-05-02T10:32:45.795341" elapsed="0.000049"/>
-</return>
-<msg time="2025-05-02T10:32:45.795522" level="TRACE">Return: {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<msg time="2025-05-02T10:32:45.795626" level="INFO">${book} = {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True}</msg>
-<var>${book}</var>
-<doc>Returns a randomly selected book that is available</doc>
-<status status="PASS" start="2025-05-02T10:32:45.492658" elapsed="0.303005"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:45.795967" level="TRACE">Arguments: [ {'id': 1, 'name': 'The Russian', 'type': 'fiction', 'available': True} | 'id' ]</msg>
-<msg time="2025-05-02T10:32:45.796074" level="TRACE">Return: 1</msg>
-<msg time="2025-05-02T10:32:45.796165" level="INFO">${book_id} = 1</msg>
-<var>${book_id}</var>
-<arg>${book}</arg>
-<arg>id</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.795827" elapsed="0.000372"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:45.796442" level="TRACE">Arguments: [ 'bookId=${book_id}' | 'customerName=${CLIENT_NAME}' ]</msg>
-<msg time="2025-05-02T10:32:45.796721" level="TRACE">Return: {'bookId': 1, 'customerName': 'avvhjwcu1746178324'}</msg>
-<msg time="2025-05-02T10:32:45.796826" level="INFO">${body} = {'bookId': 1, 'customerName': 'avvhjwcu1746178324'}</msg>
-<var>${body}</var>
-<arg>bookId=${book_id}</arg>
-<arg>customerName=${CLIENT_NAME}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.796378" elapsed="0.000498"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:45.797266" level="TRACE">Arguments: [ 'apisession' | '/orders/' | json={'bookId': 1, 'customerName': 'avvhjwcu1746178324'} | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d',
- 'Content-type': 'application/json'} ]</msg>
-<msg time="2025-05-02T10:32:46.115290" level="DEBUG">https://simple-books-api.glitch.me:443 "POST /orders/ HTTP/1.1" 201 50</msg>
-<msg time="2025-05-02T10:32:46.115900" level="INFO">POST Request : url=https://simple-books-api.glitch.me/orders/ 
- path_url=/orders/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d', 'Content-type': 'application/json', 'Content-Length': '51'} 
- body=b'{"bookId": 1, "customerName": "avvhjwcu1746178324"}' 
- </msg>
-<msg time="2025-05-02T10:32:46.116026" level="INFO">POST Response : url=https://simple-books-api.glitch.me/orders/ 
- status=201, reason=Created 
- headers={'Connection': 'keep-alive', 'Content-Length': '50', 'etag': 'W/"32-ix2uPUWPwAw8SdSEMLvC+CG6qYU"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:42 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs10565-MRS, cache-mrs10565-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178362.976069,VS0,VE272'} 
- body={"created":true,"orderId":"UnpZRca0vJjPnYzrMNXHN"} 
- </msg>
-<msg time="2025-05-02T10:32:46.116128" level="TRACE">Return: &lt;Response [201]&gt;</msg>
-<msg time="2025-05-02T10:32:46.116296" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}</arg>
-<arg>json=${body}</arg>
-<arg>headers=${header}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:45.797038" elapsed="0.319309"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:46.117642" level="TRACE">Arguments: [ {'created': True, 'orderId': 'UnpZRca0vJjPnYzrMNXHN'} ]</msg>
-<msg time="2025-05-02T10:32:46.117893" level="TRACE">Return: {'created': True, 'orderId': 'UnpZRca0vJjPnYzrMNXHN'}</msg>
-<msg time="2025-05-02T10:32:46.118029" level="INFO">${order} = {'created': True, 'orderId': 'UnpZRca0vJjPnYzrMNXHN'}</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.116681" elapsed="0.001393"/>
-</kw>
-<kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-05-02T10:32:46.118501" level="TRACE">Arguments: [ {'created': True, 'orderId': 'UnpZRca0vJjPnYzrMNXHN'} | 'orderId' ]</msg>
-<msg time="2025-05-02T10:32:46.118637" level="TRACE">Return: 'UnpZRca0vJjPnYzrMNXHN'</msg>
-<msg time="2025-05-02T10:32:46.118736" level="INFO">${id} = UnpZRca0vJjPnYzrMNXHN</msg>
-<var>${id}</var>
-<arg>${order}</arg>
-<arg>orderId</arg>
-<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.118306" elapsed="0.000473"/>
-</kw>
-<kw name="Set Global Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:46.119084" level="TRACE">Arguments: [ '${ORDER_ID}' | '${id}' ]</msg>
-<msg time="2025-05-02T10:32:46.119382" level="INFO">${ORDER_ID} = UnpZRca0vJjPnYzrMNXHN</msg>
-<msg time="2025-05-02T10:32:46.119441" level="TRACE">Return: None</msg>
-<arg>${ORDER_ID}</arg>
-<arg>${id}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.119000" elapsed="0.000500"/>
-</kw>
-<msg time="2025-05-02T10:32:46.119601" level="TRACE">Return: None</msg>
-<status status="PASS" start="2025-05-02T10:32:45.492150" elapsed="0.627508"/>
-</kw>
-<kw name="Get Order By ID" owner="order_keywords">
-<msg time="2025-05-02T10:32:46.120760" level="TRACE">Arguments: [  ]</msg>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-05-02T10:32:46.121105" level="TRACE">Arguments: [ 'Authorization=Bearer ${AUTH_TOKEN}' ]</msg>
-<msg time="2025-05-02T10:32:46.121454" level="TRACE">Return: {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<msg time="2025-05-02T10:32:46.121622" level="INFO">${header} = {'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'}</msg>
-<var>${header}</var>
-<arg>Authorization=Bearer ${AUTH_TOKEN}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.121020" elapsed="0.000648"/>
-</kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-05-02T10:32:46.122172" level="TRACE">Arguments: [ 'apisession' | '/orders/UnpZRca0vJjPnYzrMNXHN' | headers={'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} | expected_status='200' ]</msg>
-<msg time="2025-05-02T10:32:46.410469" level="DEBUG">https://simple-books-api.glitch.me:443 "GET /orders/UnpZRca0vJjPnYzrMNXHN HTTP/1.1" 200 195</msg>
-<msg time="2025-05-02T10:32:46.411027" level="INFO">GET Request : url=https://simple-books-api.glitch.me/orders/UnpZRca0vJjPnYzrMNXHN 
- path_url=/orders/UnpZRca0vJjPnYzrMNXHN 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer d6be3d1279d2faca6ff5641edce422aa30a630a8ded79bf68f2f870b3f1c3c8d'} 
- body=None 
- </msg>
-<msg time="2025-05-02T10:32:46.411160" level="INFO">GET Response : url=https://simple-books-api.glitch.me/orders/UnpZRca0vJjPnYzrMNXHN 
- status=200, reason=OK 
- headers={'Connection': 'keep-alive', 'Content-Length': '195', 'etag': 'W/"c3-BERJRm8D0NsvIAOP/eCuDuPatDY"', 'content-type': 'application/json; charset=utf-8', 'x-powered-by': 'Express', 'Accept-Ranges': 'bytes', 'Date': 'Fri, 02 May 2025 09:32:42 GMT', 'Via': '1.1 varnish', 'X-Served-By': 'cache-mrs10565-MRS, cache-mrs10565-MRS', 'X-Cache': 'MISS, MISS', 'X-Cache-Hits': '0, 0', 'X-Timer': 'S1746178362.302075,VS0,VE241'} 
- body={"id":"UnpZRca0vJjPnYzrMNXHN","bookId":1,"customerName":"avvhjwcu1746178324","createdBy":"e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b","quantity":1,"timestamp":1746178362054} 
- </msg>
-<msg time="2025-05-02T10:32:46.411282" level="TRACE">Return: &lt;Response [200]&gt;</msg>
-<msg time="2025-05-02T10:32:46.411467" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
-<var>${resp}</var>
-<arg>apisession</arg>
-<arg>${ENDPOINT_ORDER}${ORDER_ID}</arg>
-<arg>headers=${header}</arg>
-<arg>expected_status=200</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.121890" elapsed="0.289628"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-02T10:32:46.412851" level="TRACE">Arguments: [ {'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054} ]</msg>
-<msg time="2025-05-02T10:32:46.413110" level="TRACE">Return: {'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054}</msg>
-<msg time="2025-05-02T10:32:46.413321" level="INFO">${order} = {'id': 'UnpZRca0vJjPnYzrMNXHN', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 17461783...</msg>
-<var>${order}</var>
-<arg>${resp.json()}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.411841" elapsed="0.001532"/>
-</kw>
-<return>
-<value>${order}</value>
-<status status="PASS" start="2025-05-02T10:32:46.413479" elapsed="0.000070"/>
-</return>
-<msg time="2025-05-02T10:32:46.413723" level="TRACE">Return: {'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054}</msg>
-<msg time="2025-05-02T10:32:46.413921" level="INFO">${order} = {'id': 'UnpZRca0vJjPnYzrMNXHN', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 17461783...</msg>
-<var>${order}</var>
-<status status="PASS" start="2025-05-02T10:32:46.120484" elapsed="0.293485"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-05-02T10:32:46.414926" level="TRACE">Arguments: [ {'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054} ]</msg>
-<msg time="2025-05-02T10:32:46.415168" level="INFO">{'id': 'UnpZRca0vJjPnYzrMNXHN', 'bookId': 1, 'customerName': 'avvhjwcu1746178324', 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b', 'quantity': 1, 'timestamp': 1746178362054}</msg>
-<msg time="2025-05-02T10:32:46.415252" level="TRACE">Return: None</msg>
-<arg>${order}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.414694" elapsed="0.000622"/>
-</kw>
-<kw name="Validate Order With Schema" owner="order_keywords">
-<msg time="2025-05-02T10:32:46.416423" level="TRACE">Arguments: [ ${order}={'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054} ]</msg>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.265432" level="TRACE">Arguments: [ ${book}={'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} ]</msg>
 <kw name="Validate Response With Schema" owner="common">
-<msg time="2025-05-02T10:32:46.417188" level="TRACE">Arguments: [ ${resp}={'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054} | ${SCHEMA}='order_schema.json' ]</msg>
+<msg time="2025-05-04T15:08:11.265619" level="TRACE">Arguments: [ ${resp}={'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} | ${SCHEMA}='book_schema.json' ]</msg>
 <kw name="Validate Json" owner="JSONSchemaLibrary">
-<msg time="2025-05-02T10:32:46.417855" level="TRACE">Arguments: [ 'order_schema.json' | {'id': 'UnpZRca0vJjPnYzrMNXHN',
- 'bookId': 1,
- 'customerName': 'avvhjwcu1746178324',
- 'createdBy': 'e33bfb6c9d315f92f0ec90b9abfaeed3b01f25e9f020163ab242ea7de3cea52b',
- 'quantity': 1,
- 'timestamp': 1746178362054} ]</msg>
-<msg time="2025-05-02T10:32:46.425801" level="TRACE">Return: None</msg>
+<msg time="2025-05-04T15:08:11.265765" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False} ]</msg>
+<msg time="2025-05-04T15:08:11.266399" level="TRACE">Return: None</msg>
 <arg>${SCHEMA}</arg>
 <arg>${resp}</arg>
 <doc>Validates the sample JSON against the given schema.</doc>
-<status status="PASS" start="2025-05-02T10:32:46.417667" elapsed="0.008253"/>
+<status status="PASS" start="2025-05-04T15:08:11.265710" elapsed="0.000717"/>
 </kw>
-<msg time="2025-05-02T10:32:46.426036" level="TRACE">Return: None</msg>
-<arg>${order}</arg>
-<arg>${ORDER_SCHEMA}</arg>
-<status status="PASS" start="2025-05-02T10:32:46.416846" elapsed="0.009256"/>
+<msg time="2025-05-04T15:08:11.266460" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.265520" elapsed="0.000957"/>
 </kw>
-<msg time="2025-05-02T10:32:46.426182" level="TRACE">Return: None</msg>
-<arg>${order}</arg>
-<status status="PASS" start="2025-05-02T10:32:46.416009" elapsed="0.010235"/>
+<msg time="2025-05-04T15:08:11.266501" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.265335" elapsed="0.001182"/>
 </kw>
-<tag>ValidateOrderSchema</tag>
-<status status="PASS" start="2025-05-02T10:32:45.491558" elapsed="0.935329"/>
+<var name="${book}">{'id': 2, 'name': 'Just as I Am', 'type': 'non-fiction', 'available': False}</var>
+<status status="PASS" start="2025-05-04T15:08:11.265271" elapsed="0.001262"/>
+</iter>
+<iter>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.266744" level="TRACE">Arguments: [ ${book}={'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
+<kw name="Validate Response With Schema" owner="common">
+<msg time="2025-05-04T15:08:11.266936" level="TRACE">Arguments: [ ${resp}={'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} | ${SCHEMA}='book_schema.json' ]</msg>
+<kw name="Validate Json" owner="JSONSchemaLibrary">
+<msg time="2025-05-04T15:08:11.267082" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True} ]</msg>
+<msg time="2025-05-04T15:08:11.267696" level="TRACE">Return: None</msg>
+<arg>${SCHEMA}</arg>
+<arg>${resp}</arg>
+<doc>Validates the sample JSON against the given schema.</doc>
+<status status="PASS" start="2025-05-04T15:08:11.267033" elapsed="0.000691"/>
+</kw>
+<msg time="2025-05-04T15:08:11.267756" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.266837" elapsed="0.000937"/>
+</kw>
+<msg time="2025-05-04T15:08:11.267796" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.266651" elapsed="0.001161"/>
+</kw>
+<var name="${book}">{'id': 3, 'name': 'The Vanishing Half', 'type': 'fiction', 'available': True}</var>
+<status status="PASS" start="2025-05-04T15:08:11.266591" elapsed="0.001235"/>
+</iter>
+<iter>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.268022" level="TRACE">Arguments: [ ${book}={'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
+<kw name="Validate Response With Schema" owner="common">
+<msg time="2025-05-04T15:08:11.268210" level="TRACE">Arguments: [ ${resp}={'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} | ${SCHEMA}='book_schema.json' ]</msg>
+<kw name="Validate Json" owner="JSONSchemaLibrary">
+<msg time="2025-05-04T15:08:11.268341" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True} ]</msg>
+<msg time="2025-05-04T15:08:11.268931" level="TRACE">Return: None</msg>
+<arg>${SCHEMA}</arg>
+<arg>${resp}</arg>
+<doc>Validates the sample JSON against the given schema.</doc>
+<status status="PASS" start="2025-05-04T15:08:11.268292" elapsed="0.000671"/>
+</kw>
+<msg time="2025-05-04T15:08:11.268995" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.268114" elapsed="0.000899"/>
+</kw>
+<msg time="2025-05-04T15:08:11.269035" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.267934" elapsed="0.001118"/>
+</kw>
+<var name="${book}">{'id': 4, 'name': 'The Midnight Library', 'type': 'fiction', 'available': True}</var>
+<status status="PASS" start="2025-05-04T15:08:11.267879" elapsed="0.001188"/>
+</iter>
+<iter>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.269270" level="TRACE">Arguments: [ ${book}={'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
+<kw name="Validate Response With Schema" owner="common">
+<msg time="2025-05-04T15:08:11.269451" level="TRACE">Arguments: [ ${resp}={'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} | ${SCHEMA}='book_schema.json' ]</msg>
+<kw name="Validate Json" owner="JSONSchemaLibrary">
+<msg time="2025-05-04T15:08:11.269581" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True} ]</msg>
+<msg time="2025-05-04T15:08:11.270176" level="TRACE">Return: None</msg>
+<arg>${SCHEMA}</arg>
+<arg>${resp}</arg>
+<doc>Validates the sample JSON against the given schema.</doc>
+<status status="PASS" start="2025-05-04T15:08:11.269532" elapsed="0.000675"/>
+</kw>
+<msg time="2025-05-04T15:08:11.270240" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.269354" elapsed="0.000905"/>
+</kw>
+<msg time="2025-05-04T15:08:11.270282" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.269182" elapsed="0.001117"/>
+</kw>
+<var name="${book}">{'id': 5, 'name': 'Untamed', 'type': 'non-fiction', 'available': True}</var>
+<status status="PASS" start="2025-05-04T15:08:11.269123" elapsed="0.001191"/>
+</iter>
+<iter>
+<kw name="Validate Book With Schema" owner="book_keywords">
+<msg time="2025-05-04T15:08:11.270512" level="TRACE">Arguments: [ ${book}={'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
+<kw name="Validate Response With Schema" owner="common">
+<msg time="2025-05-04T15:08:11.270695" level="TRACE">Arguments: [ ${resp}={'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} | ${SCHEMA}='book_schema.json' ]</msg>
+<kw name="Validate Json" owner="JSONSchemaLibrary">
+<msg time="2025-05-04T15:08:11.270834" level="TRACE">Arguments: [ 'book_schema.json' | {'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True} ]</msg>
+<msg time="2025-05-04T15:08:11.271424" level="TRACE">Return: None</msg>
+<arg>${SCHEMA}</arg>
+<arg>${resp}</arg>
+<doc>Validates the sample JSON against the given schema.</doc>
+<status status="PASS" start="2025-05-04T15:08:11.270782" elapsed="0.000669"/>
+</kw>
+<msg time="2025-05-04T15:08:11.271483" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<arg>${BOOK_SCHEMA}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.270596" elapsed="0.000904"/>
+</kw>
+<msg time="2025-05-04T15:08:11.271524" level="TRACE">Return: None</msg>
+<arg>${book}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.270424" elapsed="0.001116"/>
+</kw>
+<var name="${book}">{'id': 6, 'name': 'Viscount Who Loved Me', 'type': 'fiction', 'available': True}</var>
+<status status="PASS" start="2025-05-04T15:08:11.270367" elapsed="0.001239"/>
+</iter>
+<var>${book}</var>
+<value>@{books}</value>
+<status status="PASS" start="2025-05-04T15:08:11.261644" elapsed="0.009985"/>
+</for>
+<msg time="2025-05-04T15:08:11.271659" level="TRACE">Return: None</msg>
+<arg>${books}</arg>
+<status status="PASS" start="2025-05-04T15:08:11.261377" elapsed="0.010302"/>
+</kw>
+<tag>ValidateBooksSchema</tag>
+<status status="PASS" start="2025-05-04T15:08:10.956408" elapsed="0.315523"/>
 </test>
-<meta name="Randomized">Suites and tests (seed 2701370460077734001)</meta>
-<status status="PASS" start="2025-05-02T10:32:03.931904" elapsed="42.497180"/>
+<status status="PASS" start="2025-05-04T15:08:10.502217" elapsed="0.770440"/>
+</suite>
+<meta name="Randomized">Suites and tests (seed 6892896698219892039)</meta>
+<status status="PASS" start="2025-05-04T15:08:10.480536" elapsed="0.792967"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">deleteOrder</stat>
-<stat pass="1" fail="0" skip="0">ValidateOrderSchema</stat>
-<stat pass="1" fail="0" skip="0">ValidateOrdersSchema</stat>
-<stat pass="1" fail="0" skip="0">ValidateUpdate</stat>
+<stat pass="1" fail="0" skip="0">ValidateBooksSchema</stat>
 </tag>
 <suite>
-<stat name="Order" id="s1" pass="4" fail="0" skip="0">Order</stat>
+<stat name="Tests" id="s1" pass="1" fail="0" skip="0">Tests</stat>
+<stat name="Books" id="s1-s1" pass="1" fail="0" skip="0">Tests.Books</stat>
 </suite>
 </statistics>
 <errors>
